@@ -17,7 +17,6 @@ class UserBiodataTest extends TestCase
 
     public function test_update_form_biodata_is_avaliable()
     {
-        $this->withoutExceptionHandling();
         $user = User::factory()->create();
         Biodata::create(['user_id' => $user->id]);
 
@@ -28,7 +27,6 @@ class UserBiodataTest extends TestCase
     public function test_user_biodata_can_update()
     {
 
-        $this->withoutExceptionHandling();
         $user = User::factory()->create();
         Biodata::create(['user_id' => $user->id]);
 
@@ -38,6 +36,18 @@ class UserBiodataTest extends TestCase
 
         $this->assertEquals('031-111', $user->fresh()->biodata->phone);
         $this->assertEquals('test address', $user->fresh()->biodata->address);
+    }
+
+    public function test_field_biodata_is_required()
+    {
+
+        $user = User::factory()->create();
+        Biodata::create(['user_id' => $user->id]);
+
+        Livewire::actingAs($user)->test(UpdateUserBiodata::class)
+                ->set('state', ['phone' => '' , 'address' => 'test address'])
+                ->call('updateUserBiodata')
+                ->assertHasErrors(['phone' => 'required']);
 
     }
 }
