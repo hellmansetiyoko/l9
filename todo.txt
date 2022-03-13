@@ -1,0 +1,4 @@
+1. make model
+    #make table structure
+    #make factory
+    #define relationship
