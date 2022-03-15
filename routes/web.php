@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\TeacherController;
+use App\Models\Teacher;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +23,6 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::post('teacher',[TeacherController::class, 'create'])->name('teacher.create');
+Route::post('teacher/{teacher:nip}',[TeacherController::class, 'update'])->name('teacher.update');

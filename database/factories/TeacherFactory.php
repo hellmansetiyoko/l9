@@ -18,6 +18,8 @@ class TeacherFactory extends Factory
     {
         return [
             'nip' => $this->faker->randomNumber(),
+            'strata' => "S1",
+            'campus_name' => $this->faker->word(14),
         ];
     }
 }

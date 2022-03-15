@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Teacher;
+use App\Models\Course;
 use App\Models\User;
+use App\Repositories\Enums\CoursesNameEnum;
 
 class TeacherSeeder extends Seeder
 {
@@ -28,5 +29,11 @@ class TeacherSeeder extends Seeder
         ]);
 
         $user->biodata()->create();
+
+
+        Course::create([
+            'teacher_id' => $user->fresh()->roleable_id,
+            'name' => CoursesNameEnum::NONE,
+        ]);
     }
 }
