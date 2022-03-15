@@ -7,14 +7,17 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Actions\Roleable\GiveUserRole;
+use App\Repositories\TeacherRepository;
 use Illuminate\Support\Facades\Validator;
 
 class TeacherController extends Controller
 {
 
-    public function index()
+    public function index(TeacherRepository $repository)
     {
-        return view();
+        return view('livewire.teacher.manage-teacher', [
+            'teachers' => $repository->getAll(),
+        ]);
     }
 
     public function create(Request $request, GiveUserRole $setRole)
