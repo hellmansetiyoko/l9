@@ -9,7 +9,7 @@ class TeacherRepository
 
     public function getAll()
     {
-        return $this->format(Teacher::all())->toArray();
+        return $this->format(Teacher::all());
     }
 
     public function format($data)
@@ -18,6 +18,8 @@ class TeacherRepository
                 return [
                 'name' => $item->user->name ?? 'no name',
                 'strata' => $item->strata->value,
+                'alumni' => $item->campus_name,
+
                 ];
             });
     }

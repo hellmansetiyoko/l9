@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TeacherController;
+use App\Http\Livewire\Teacher\ListTeacher;
 use App\Http\Livewire\Teacher\ManageTeacher;
 use App\Models\Teacher;
 use App\Repositories\TeacherRepository;
@@ -28,8 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::post('teacher',[TeacherController::class, 'create'])->name('teacher.create');
 Route::post('teacher/{teacher:nip}',[TeacherController::class, 'update'])->name('teacher.update');
+Route::get('/teachers', [TeacherController::class, 'home'])->name('teacher.all');
 
 
-Route::get('teachers',ManageTeacher::class)->name('teacher.all');
-// Route::get('teachers',function(TeacherRepository $teacherRepository){
-// });
+// Route::get('teachers',ListTeacher::class)->name('teacher.all');

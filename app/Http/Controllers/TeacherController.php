@@ -13,11 +13,9 @@ use Illuminate\Support\Facades\Validator;
 class TeacherController extends Controller
 {
 
-    public function index(TeacherRepository $repository)
+    public function home()
     {
-        return view('livewire.teacher.manage-teacher', [
-            'teachers' => $repository->getAll(),
-        ]);
+        return view('teacher.manage-teachers');
     }
 
     public function create(Request $request, GiveUserRole $setRole)
