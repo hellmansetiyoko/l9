@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BiodataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,13 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users/all', 'all');
+    // Route::post('/orders', 'store');
+});
+
+Route::controller(BiodataController::class)->group(function () {
+    Route::get('/biodata', 'index');
+    // Route::post('/orders', 'store');
+});
