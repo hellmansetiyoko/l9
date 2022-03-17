@@ -12,10 +12,12 @@ class UpdateUserBiodata extends Component
 
     public $state = [];
 
+
     public function mount()
     {
         $this->state = Biodata::where('user_id', Auth::id())->first()->toArray();
     }
+
 
     public function updateUserBiodata(UpdateBiodataInformation $updater)
     {

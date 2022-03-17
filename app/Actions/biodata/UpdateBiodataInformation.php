@@ -12,6 +12,7 @@ class UpdateBiodataInformation
         Validator::make($inputs, [
             'phone' => 'required',
             'address' => 'required',
+            'about' => 'required',
         ])->validate();
         $user->biodata->update($inputs);
     }

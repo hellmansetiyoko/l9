@@ -33,11 +33,19 @@ class UserBiodataTest extends TestCase
         Biodata::create(['user_id' => $user->id]);
 
         Livewire::actingAs($user)->test(UpdateUserBiodata::class)
-                ->set('state', ['phone' => '031-111' , 'address' => 'test address'])
+                ->set('state',
+                [
+                    'phone' => '031-111' ,
+                    'address' => 'test address',
+                    'about' => 'test about',
+                    'slug' => str()->slug('test-slug')
+                ])
                 ->call('updateUserBiodata');
 
         $this->assertEquals('031-111', $user->fresh()->biodata->phone);
         $this->assertEquals('test address', $user->fresh()->biodata->address);
+        $this->assertEquals('test about', $user->fresh()->biodata->about);
+        $this->assertEquals(str()->slug('test slug'), $user->fresh()->biodata->slug);
     }
 
     public function test_field_biodata_is_required()

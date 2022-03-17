@@ -14,7 +14,7 @@ class Biodata extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['user_id', 'phone', 'address'];
+    protected $fillable = ['user_id', 'phone', 'address', 'about', 'slug'];
 
     protected $appends = [
         'name', 'role', 'email'
