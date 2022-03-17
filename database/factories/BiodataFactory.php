@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class BiodataFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
+            'slug' => Str::slug($this->faker->word(3)),
             'phone' => $this->faker->phoneNumber(),
             'address' => $this->faker->streetAddress(),
         ];

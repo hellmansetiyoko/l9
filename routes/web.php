@@ -1,8 +1,11 @@
 <?php
 
+use App\Models\Biodata;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BiodataController;
+use App\Http\Livewire\Admin\Module\EditUserProfileInformation;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +32,14 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::controller(BiodataController::class)->group(function () {
+    // Route::get('/biodata', 'index');
+
     Route::get('/biodata', 'index');
+    Route::get('/biodata/{biodata}', 'editUser')->name('biodata.user');
     // Route::post('/orders', 'store');
 });
+
+Route::get('admin/user/edit/{user}', EditUserProfileInformation::class)->name('admin.edit-user');
+Route::get( 'bio/{biodata:slug}', fn(Biodata $biodata)=>
+                view('public.user-profile', ['bio' => $biodata])
+                );

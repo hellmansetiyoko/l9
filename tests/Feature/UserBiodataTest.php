@@ -7,9 +7,11 @@ use App\Models\User;
 use Livewire\Livewire;
 use App\Models\Biodata;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Http\Livewire\Biodata\UpdateUserBiodata;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Http\Livewire\Admin\Module\EditUserProfileInformation;
 
 class UserBiodataTest extends TestCase
 {
@@ -49,5 +51,25 @@ class UserBiodataTest extends TestCase
                 ->call('updateUserBiodata')
                 ->assertHasErrors(['phone' => 'required']);
 
+    }
+
+    public function test_admin_can_update_user()
+    {
+        $user = User::factory()->create();
+        Biodata::create(['user_id' => $user->id]);
+        Livewire::test(EditUserProfileInformation::class, ['user' => $user])
+        ->set('user', ['id'=> $user->id , 'name' => 'test name' , 'email' => 'mail@test.com'])
+        ->call('updateUserAccount');
+        $this->assertSame('test name', User::first()->name);
+    }
+
+    public function test_admin_can_update_password()
+    {
+        $user = User::factory()->create();
+        Biodata::create(['user_id' => $user->id]);
+        Livewire::test(EditUserProfileInformation::class, ['user' => $user])
+        ->set('resetPassword',  Hash::make('new-password'))
+        ->call('updateUserPassword');
+        $this->assertTrue(Hash::check('new-password', $user->fresh()->password));
     }
 }

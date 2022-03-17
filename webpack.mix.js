@@ -17,7 +17,7 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ]);
 
-mix.js('resources/js/ckeditor.js', 'public/js/ckeditor')
+mix.copy('resources/js/ckeditor', 'public/js/ckeditor')
 
 if (mix.inProduction()) {
     mix.version();

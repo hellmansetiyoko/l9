@@ -1,6 +1,7 @@
 <div>
     <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="flex flex-col">
+    <h2>All User with biodata</h2>
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
@@ -26,7 +27,7 @@
                     <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $biodata->phone }}</td>
                     <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $biodata->address }}</td>
                     <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                      <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                      <a href="{{ route('biodata.user', ['biodata' => $biodata->id]) }}" class="text-indigo-600 hover:text-indigo-900">Edit User</a>
                     </td>
                   </tr>
                 @endforeach
